@@ -6,12 +6,15 @@
  */
 
 import React from 'react';
+import Sidebar from './Sidebar';
 
 export default function HomePage() {
   return (
-    <h1>
-      <div>Hello World</div>
-      {/* TODO: ADD SIDEBAR */}
-    </h1>
+    <div id="HomePage">
+      <Sidebar pageWrapId="page-wrap" outerContainerId="HomePage" />
+      <div id="page-wrap">
+        <div>Hello World</div>
+      </div>
+    </div>
   );
 }

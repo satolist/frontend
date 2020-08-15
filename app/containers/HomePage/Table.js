@@ -7,7 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
-function Table({ columns, data }) {
+function Table({ columns, data, onClick }) {
 	const {
 		getTableProps,
 		getTableBodyProps,
@@ -53,7 +53,10 @@ function Table({ columns, data }) {
 						return (
 							<TableRow {...row.getRowProps()}>
 								{row.cells.map(cell => (
-									<TableCell {...cell.getCellProps()}>
+									<TableCell
+										onClick={() => onClick(row.original)}
+										{...cell.getCellProps()}
+									>
 										{cell.render('Cell')}
 									</TableCell>
 								))}

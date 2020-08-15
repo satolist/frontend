@@ -5,8 +5,10 @@
  *
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
+import CKEditor from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Sidebar from 'components/Sidebar';
 import Table from './Table';
 
@@ -43,6 +45,16 @@ export default function HomePage() {
 	);
 
 	const { data, status } = useQuery('photos', fetchPhotos);
+	const [photo, setPhoto] = useState(null);
+
+	const getDynamicHtml = () => `
+		<p>${photo.title}</p>
+		<img src="${photo.url}"/>
+	`;
+
+	const onClick = selectedPhoto => {
+		setPhoto(selectedPhoto);
+	};
 
 	return (
 		<div id="HomePage">
@@ -50,7 +62,21 @@ export default function HomePage() {
 			<div id="page-wrap" className="container mx-auto">
 				{status === 'error' && <div>Error fetching data</div>}
 				{status === 'loading' && <div>Loading ....</div>}
-				{status === 'success' && <Table columns={columns} data={data} />}
+				{!photo && status === 'success' && (
+					<Table onClick={onClick} columns={columns} data={data} />
+				)}
+				{photo && (
+					<div>
+						<CKEditor editor={ClassicEditor} data={getDynamicHtml()} />
+						<button
+							className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+							type="button"
+							onClick={() => setPhoto(null)}
+						>
+							Back
+						</button>
+					</div>
+				)}
 			</div>
 		</div>
 	);

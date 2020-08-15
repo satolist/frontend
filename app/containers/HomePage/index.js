@@ -6,9 +6,8 @@
  */
 
 import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import { useQuery } from 'react-query';
-import Sidebar from './Sidebar';
+import Sidebar from 'components/Sidebar';
 import Table from './Table';
 
 const fetchPhotos = async () => {
@@ -49,7 +48,6 @@ export default function HomePage() {
 		<div id="HomePage">
 			<Sidebar pageWrapId="page-wrap" outerContainerId="HomePage" />
 			<div id="page-wrap" className="container mx-auto">
-				<CssBaseline />
 				{status === 'error' && <div>Error fetching data</div>}
 				{status === 'loading' && <div>Loading ....</div>}
 				{status === 'success' && <Table columns={columns} data={data} />}

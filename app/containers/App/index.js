@@ -11,17 +11,21 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
+import UsersPage from 'containers/UsersPage/Loadable';
+import AlbumPage from 'containers/AlbumPage/Loadable';
 
 import GlobalStyle from '../../global-styles';
 
 export default function App() {
-  return (
-    <div>
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route component={NotFoundPage} />
-      </Switch>
-      <GlobalStyle />
-    </div>
-  );
+	return (
+		<div>
+			<Switch>
+				<Route exact path="/" component={HomePage} />
+				<Route exact path="/users" component={UsersPage} />
+				<Route exact path="/albums" component={AlbumPage} />
+				<Route component={NotFoundPage} />
+			</Switch>
+			<GlobalStyle />
+		</div>
+	);
 }
